@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using static JuiceTip_API.Output.AllProductOutput;
 using Microsoft.IdentityModel.Tokens;
 using static JuiceTip_API.Output.ProductProgressOutput;
+using JuiceTip_API.Factories;
 
 namespace JuiceTip_API.Helper
 {
@@ -215,20 +216,8 @@ namespace JuiceTip_API.Helper
 
                     if (duplicateProduct == null)
                     {
-                        var newProduct = new MsProduct
-                        {
-                            ProductId = product.ProductId,
-                            ProductImage = product.ProductImage,
-                            ProductName = product.ProductName,
-                            ProductDescription = product.ProductDescription,
-                            ProductPrice = Math.Round(product.ProductPrice, 7),
-                            CategoryId = product.CategoryId,
-                            CustomerId = product.CustomerId,
-                            RegionId = product.RegionId,
-                            Notes = product.Notes,
-                            CreatedAt = DateTime.Now,
-                            LastUpdatedAt = DateTime.Now
-                        };
+                        var productFactory = new ProductFactory();
+                        var newProduct = productFactory.CreateProduct(product);
 
                         _dbContext.MsProduct.Add(newProduct);
                         _dbContext.SaveChanges();

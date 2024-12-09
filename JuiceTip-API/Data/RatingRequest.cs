@@ -12,5 +12,6 @@ namespace JuiceTip_API.Data
         public string Comment { get; set; }
         [Required]
         public int Rating { get; set; }
+        public Guid RatingId { get; set; }
     }
 }

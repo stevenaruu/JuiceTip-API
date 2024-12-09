@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Factories;
 using JuiceTip_API.Model;
 using JuiceTip_API.Output;
 using Microsoft.AspNetCore.Mvc;
@@ -43,16 +44,8 @@ namespace JuiceTip_API.Helper
                 _dbContext.MsProduct.Update(product);
                 _dbContext.SaveChanges();
 
-                var newTransacionDetail = new TransactionDetail
-                {
-                    TransactionId = transactionDetail.TransactionId,
-                    ApplicationFee = transactionDetail.ApplicationFee,
-                    JustiperId = transactionDetail.JustiperId,
-                    ProductId = transactionDetail.ProductId,
-                    SubtotalPayment = transactionDetail.SubtotalPayment,
-                    SubtotalProduct = transactionDetail.SubtotalProduct,
-                    TransactionStatus = transactionDetail.TransactionStatus
-                };
+                var transactionFactory = new TransactionFactory();
+                var newTransacionDetail = transactionFactory.CreateTransaction(transactionDetail);
 
                 _dbContext.TransactionDetail.Add(newTransacionDetail);
                 _dbContext.SaveChanges();

@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Factories;
 using JuiceTip_API.Model;
 using JuiceTip_API.Output;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,13 @@ namespace JuiceTip_API.Helper
             try
             {
                 var returnValue = new StatusOutput();
-                var rate = _dbContext.MsRating.Where(x => x.Rating == rating.Rating).FirstOrDefault();
+                rating.RatingId = _dbContext.MsRating
+                    .Where(x => x.Rating == rating.Rating)
+                    .Select(x => x.RatingId)
+                    .FirstOrDefault();
 
-                var newRating = new TrReview
-                {
-                    Comment = rating.Comment,
-                    RatingId = rate.RatingId,
-                    CustomerId = rating.CustomerId,
-                    UserId = rating.UserId,
-                    ReviewDate = DateTime.Now
-                };
+                var ratingFactory = new RatingFactory();
+                var newRating = ratingFactory.CreateRating(rating);
 
                 _dbContext.TrReview.Add(newRating);
                 _dbContext.SaveChanges();

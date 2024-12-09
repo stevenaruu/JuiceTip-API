@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using static System.Net.WebRequestMethods;
 using static JuiceTip_API.Output.CustomerOutput;
 using JuiceTip_API.Output;
+using JuiceTip_API.Factories;
 
 namespace JuiceTip_API.Helper
 {
@@ -95,21 +96,8 @@ namespace JuiceTip_API.Helper
             {
                 if (user != null)
                 {
-
-                    var newUser = new MsUser
-                    {
-                        Email = user.Email,
-                        Password = user.Password,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Address = user.Address,
-                        Telephone = user.Telephone,
-                        Gender = user.Gender,
-                        ProfileImage = null,
-                        JuiceCoin = 0,
-                        Created = DateTime.Now,
-                        DOB = user.DOB
-                    };
+                    var userFactory = new UserFactory();
+                    var newUser = userFactory.CreateUser(user);
 
                     _dbContext.MsUser.Add(newUser);
                     _dbContext.SaveChanges();
