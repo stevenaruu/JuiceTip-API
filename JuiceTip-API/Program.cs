@@ -11,9 +11,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+JuiceTipDBContext dbContextSingleton = null;
+
+builder.Services.AddSingleton(provider =>
+{
+    if (dbContextSingleton == null)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<JuiceTipDBContext>();
+        optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection"));
+        dbContextSingleton = new JuiceTipDBContext(optionsBuilder.Options);
+    }
+
+    return dbContextSingleton;
+});
+
 builder.Services.AddDbContext<JuiceTipDBContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection"))
 );
+
 builder.Services.AddScoped<UserHelper>();
 builder.Services.AddScoped<RegionHelper>();
 builder.Services.AddScoped<ProductHelper>();

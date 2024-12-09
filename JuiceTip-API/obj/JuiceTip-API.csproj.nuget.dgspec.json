@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ProgramApps\\JuiceTip\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj": {}
+    "D:\\APP PROJECT\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj": {}
   },
   "projects": {
-    "C:\\ProgramApps\\JuiceTip\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj": {
+    "D:\\APP PROJECT\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProgramApps\\JuiceTip\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj",
+        "projectUniqueName": "D:\\APP PROJECT\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj",
         "projectName": "JuiceTip-API",
-        "projectPath": "C:\\ProgramApps\\JuiceTip\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj",
-        "packagesPath": "C:\\Users\\steve\\.nuget\\packages\\",
-        "outputPath": "C:\\ProgramApps\\JuiceTip\\JuiceTip-API\\JuiceTip-API\\obj\\",
+        "projectPath": "D:\\APP PROJECT\\JuiceTip-API\\JuiceTip-API\\JuiceTip-API.csproj",
+        "packagesPath": "C:\\Users\\steven\\.nuget\\packages\\",
+        "outputPath": "D:\\APP PROJECT\\JuiceTip-API\\JuiceTip-API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\steven\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,8 +26,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://pkgs.dev.azure.com/itbinus/_packaging/Binus.WS.Pattern/nuget/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
