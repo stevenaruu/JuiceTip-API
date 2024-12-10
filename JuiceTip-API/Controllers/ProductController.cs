@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Facade;
 using JuiceTip_API.Helper;
 using JuiceTip_API.Model;
 using JuiceTip_API.Output;
@@ -15,90 +16,45 @@ namespace JuiceTip_API.Controllers
     [Route("product")]
     public class ProductController : Controller
     {
-        private ProductHelper productHelper;
-        public ProductController(ProductHelper productHelper)
+        private ProductFacade productFacade;
+        public ProductController(ProductFacade productFacade)
         {
-            this.productHelper = productHelper;
+            this.productFacade = productFacade;
         }
 
         [HttpPost("upsert")]
         [Produces("application/json")]
         public async Task<IActionResult> AddProduct([FromBody] ProductRequest product)
         {
-            try
-            {
-                var objJSON = new ProductOutput();
-                objJSON.payload = productHelper.UpsertProduct(product);
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await productFacade.AddProduct(product);
         }
 
         [HttpGet("")]
         [Produces("application/json")]
         public async Task<IActionResult> Products()
         {
-            try
-            {
-                var objJSON = new AllProductOutput();
-                objJSON.payload = productHelper.GetProducts();
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await productFacade.Products();
         }
 
         [HttpPost("id")]
         [Produces("application/json")]
         public async Task<IActionResult> Product([FromBody] ProductByIdRequest product)
         {
-            try
-            {
-                var objJSON = new ProductByIdOutput();
-                objJSON.payload = productHelper.GetProductById(product);
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await productFacade.Product(product);
         }
 
         [HttpPost("delete")]
         [Produces("application/json")]
         public async Task<IActionResult> DeleteProduct([FromBody] ProductByIdRequest product)
         {
-            try
-            {
-                var objJSON = new StatusOutput();
-                objJSON = productHelper.DeleteProductById(product.ProductId);
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await productFacade.DeleteProduct(product);
         }
 
         [HttpPost("progress")]
         [Produces("application/json")]
         public async Task<IActionResult> ProductProgress([FromBody] UserRequest user)
         {
-            try
-            {                 
-                var objJSON = new ProductProgressOutput();
-                objJSON.payload = productHelper.GetAllProductProgress(user);
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await productFacade.ProductProgress(user);
         }
     }
 }

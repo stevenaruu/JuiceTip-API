@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Facade;
 using JuiceTip_API.Helper;
 using JuiceTip_API.Model;
 using JuiceTip_API.Output;
@@ -12,10 +13,10 @@ namespace JuiceTip_API.Controllers
     [Route("transaction-detail")]
     public class TransactionDetailController : ControllerBase
     {
-        private TransactionDetailHelper transactionDetailHelper;
-        public TransactionDetailController(TransactionDetailHelper transactionDetailHelper)
+        private TransactionDetailFacade transactionDetailFacade;
+        public TransactionDetailController(TransactionDetailFacade transactionDetailFacade)
         {
-            this.transactionDetailHelper = transactionDetailHelper;
+            this.transactionDetailFacade = transactionDetailFacade;
         }
 
         [HttpPost("insert")]
@@ -24,9 +25,7 @@ namespace JuiceTip_API.Controllers
         {
             try
             {
-                var objJSON = new StatusOutput();
-                objJSON = transactionDetailHelper.InsertTransactionDetail(transactionDetail);
-                return new OkObjectResult(objJSON);
+                return await transactionDetailFacade.InsertTransactionDetail(transactionDetail);
             }
             catch (Exception ex)
             {

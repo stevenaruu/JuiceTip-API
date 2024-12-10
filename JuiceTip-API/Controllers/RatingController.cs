@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Facade;
 using JuiceTip_API.Helper;
 using JuiceTip_API.Model;
 using JuiceTip_API.Output;
@@ -12,10 +13,10 @@ namespace JuiceTip_API.Controllers
     [Route("rating")]
     public class RatingController : ControllerBase
     {
-        private RatingHelper ratingHelper;
-        public RatingController(RatingHelper ratingHelper)
+        private RatingFacade ratingFacade;
+        public RatingController(RatingFacade ratingFacade)
         {
-            this.ratingHelper = ratingHelper;
+            this.ratingFacade = ratingFacade;
         }
 
         [HttpPost("user")]
@@ -24,9 +25,7 @@ namespace JuiceTip_API.Controllers
         {
             try
             {
-                var objJSON = new ReviewOutput();
-                objJSON.payload = ratingHelper.UserRating(user);
-                return new OkObjectResult(objJSON);
+                return await ratingFacade.UserRating(user);
             }
             catch (Exception ex)
             {
@@ -40,9 +39,7 @@ namespace JuiceTip_API.Controllers
         {
             try
             {
-                var objJSON = new StatusOutput();
-                objJSON = ratingHelper.InsertRating(rating);
-                return new OkObjectResult(objJSON);
+                return await ratingFacade.InsertRating(rating);
             }
             catch (Exception ex)
             {

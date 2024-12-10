@@ -1,4 +1,5 @@
 using JuiceTip_API;
+using JuiceTip_API.Facade;
 using JuiceTip_API.Helper;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,12 @@ builder.Services.AddSingleton(provider =>
 builder.Services.AddDbContext<JuiceTipDBContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection"))
 );
+builder.Services.AddScoped<UserFacade>();
+builder.Services.AddScoped<RegionFacade>();
+builder.Services.AddScoped<ProductFacade>();
+builder.Services.AddScoped<CategoryFacade>();
+builder.Services.AddScoped<RatingFacade>();
+builder.Services.AddScoped<TransactionDetailFacade>();
 
 builder.Services.AddScoped<UserHelper>();
 builder.Services.AddScoped<RegionHelper>();

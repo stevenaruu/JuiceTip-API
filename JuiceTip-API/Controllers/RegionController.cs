@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Facade;
 using JuiceTip_API.Helper;
 using JuiceTip_API.Output;
 using Microsoft.AspNetCore.Cors;
@@ -11,10 +12,10 @@ namespace JuiceTip_API.Controllers
     [Route("region")]
     public class RegionController : ControllerBase
     {
-        private RegionHelper regionHelper;
-        public RegionController(RegionHelper regionHelper)
+        private RegionFacade regionFacade;
+        public RegionController(RegionFacade regionFacade)
         {
-            this.regionHelper = regionHelper;
+            this.regionFacade = regionFacade;
         }
 
         [HttpPost("")]
@@ -23,9 +24,7 @@ namespace JuiceTip_API.Controllers
         {
             try
             {
-                var objJSON = new RegionOutput();
-                objJSON.payload = regionHelper.GetRegion(region);
-                return new OkObjectResult(objJSON);
+                return await regionFacade.Region(region);
             }
             catch (Exception ex)
             {

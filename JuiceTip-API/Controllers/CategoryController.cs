@@ -1,4 +1,5 @@
 ﻿using JuiceTip_API.Data;
+using JuiceTip_API.Facade;
 using JuiceTip_API.Helper;
 using JuiceTip_API.Output;
 using Microsoft.AspNetCore.Cors;
@@ -11,26 +12,18 @@ namespace JuiceTip_API.Controllers
     [Route("category")]
     public class CategoryController : ControllerBase
     {
-        private CategoryHelper categoryHelper;
-        public CategoryController(CategoryHelper categoryHelper)
+        private CategoryFacade categoryFacade;
+
+        public CategoryController(CategoryFacade categoryFacade)
         {
-            this.categoryHelper = categoryHelper;
+            this.categoryFacade = categoryFacade;
         }
 
         [HttpPost("")]
         [Produces("application/json")]
         public async Task<IActionResult> Category([FromBody] CategoryRequest category)
         {
-            try
-            {
-                var objJSON = new CategoryOutput();
-                objJSON.payload = categoryHelper.GetCategory(category);
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await categoryFacade.Category(category);
         }
     }
 }
