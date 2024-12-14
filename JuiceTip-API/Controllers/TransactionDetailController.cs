@@ -23,14 +23,7 @@ namespace JuiceTip_API.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> InsertTransactionDetail([FromBody] TransactionDetail transactionDetail)
         {
-            try
-            {
-                return await transactionDetailFacade.InsertTransactionDetail(transactionDetail);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await transactionDetailFacade.InsertTransactionDetail(transactionDetail);
         }
     }
 }

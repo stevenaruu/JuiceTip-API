@@ -22,14 +22,7 @@ namespace JuiceTip_API.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> Region([FromBody] RegionRequest region)
         {
-            try
-            {
-                return await regionFacade.Region(region);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await regionFacade.Region(region);
         }
     }
 }

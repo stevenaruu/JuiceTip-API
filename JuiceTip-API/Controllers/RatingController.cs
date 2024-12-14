@@ -23,28 +23,14 @@ namespace JuiceTip_API.Controllers
         [Produces("application/json")]
         public async Task<IActionResult> UserRating([FromBody] UserRequest user)
         {
-            try
-            {
-                return await ratingFacade.UserRating(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await ratingFacade.UserRating(user);
         }
 
         [HttpPost("insert")]
         [Produces("application/json")]
         public async Task<IActionResult> InsertRating([FromBody] RatingRequest rating)
         {
-            try
-            {
-                return await ratingFacade.InsertRating(rating);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return await ratingFacade.InsertRating(rating);
         }
     }
 }
